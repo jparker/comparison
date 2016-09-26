@@ -5,6 +5,14 @@ module Comparison
   class Presenter < DelegateClass(Comparator)
     extend Forwardable
 
+    def difference(**options)
+      if positive?
+        number_to_currency absolute, format: '+%u%n', **options
+      else
+        number_to_currency absolute, **options
+      end
+    end
+
     def percentage(delimiter: ',', precision: 0, **options)
       case
       when nan? || zero?
@@ -12,15 +20,15 @@ module Comparison
       when infinite?
         nil
       when positive?
-        number_to_percentage change, delimiter: delimiter,
+        number_to_percentage relative, delimiter: delimiter,
           precision: precision, format: '+%n%', **options
       else
-        number_to_percentage change, delimiter: delimiter,
+        number_to_percentage relative, delimiter: delimiter,
           precision: precision, **options
       end
     end
 
-    delegate [:number_to_percentage] => :'ActiveSupport::NumberHelper'
+    delegate %i[number_to_currency number_to_percentage] => :'ActiveSupport::NumberHelper'
 
     def arrow
       case
