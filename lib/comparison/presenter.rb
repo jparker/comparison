@@ -1,8 +1,8 @@
 require 'delegate'
 require 'forwardable'
 
-class Comparison
-  class Presenter < DelegateClass(Comparison)
+module Comparison
+  class Presenter < DelegateClass(Comparator)
     extend Forwardable
 
     def percentage(delimiter: ',', precision: 0, **options)

@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class Comparison
+module Comparison
   class ApplicationHelperTest < ActionView::TestCase
     def test_yields_a_comparison_presenter
       compare 100, 75 do |cmp|
