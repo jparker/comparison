@@ -29,5 +29,16 @@ class Comparison
         nil
       end
     end
+
+    # TODO: #icon
+    # The #arrow method generates simple HTML character entities suitable for
+    # limited funcationality views like HTML email. The #icon method will
+    # return more complex graphical arrow suitable for first-class browser
+    # views.
+
+    # TODO: #css
+    # The #css method will generate CSS styles that can be passed to the style
+    # attribute of a tag, suitable for limited functionality views such as HTML
+    # email.
   end
 end

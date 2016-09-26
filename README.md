@@ -51,6 +51,10 @@ or, for no change, an empty string).
 | Q4 2015 | $75.00  |  $75.00 |    $0.00 |          0.0% |
 | Q3 2015 | $0.00   |   $0.00 |    $0.00 |          0.0% |
 
+## TODO
+Add some global configuration management to let applications specify the
+presentation specifics (character entity to use for `#arrow`, etc.)
+
 ## Installation
 Add this line to your application's Gemfile:
 
