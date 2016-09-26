@@ -1,7 +1,10 @@
 require 'delegate'
+require 'forwardable'
 
 class Comparison
   class Presenter < DelegateClass(Comparison)
+    extend Forwardable
+
     def percentage(delimiter: ',', precision: 0, **options)
       case
       when nan? || zero?
@@ -17,7 +20,7 @@ class Comparison
       end
     end
 
-    delegate :number_to_percentage, to: :'ActiveSupport::NumberHelper'
+    delegate [:number_to_percentage] => :'ActiveSupport::NumberHelper'
 
     def arrow
       case

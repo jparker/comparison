@@ -28,16 +28,16 @@ class Comparison
   end
 
   def difference
-    @differences ||= m - n
+    @difference ||= m - n
   end
   alias_method :diff, :difference
 
   def change
-    @percentage ||= if n.negative?
-                      (1 - m / n) * 100
-                    else
-                      (m / n - 1) * 100
-                    end
+    @change ||= if n.negative?
+                  (1 - m / n) * 100
+                else
+                  (m / n - 1) * 100
+                end
   end
   alias_method :chg, :change
 end
