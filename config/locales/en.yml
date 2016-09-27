@@ -1,6 +1,10 @@
 en:
   comparison:
     arrows:
-      up_html:   '&uarr;'
-      down_html: '&darr;'
-      none_html: ''
+      positive_html: '&uarr;'
+      negative_html: '&darr;'
+      nochange_html: ''
+    css:
+      positive_html: ''
+      negative_html: ''
+      nochange_html: ''

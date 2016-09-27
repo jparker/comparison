@@ -8,7 +8,7 @@ module Comparison
     extend Forwardable
     include ActionView::Helpers::TranslationHelper
 
-    ARROWS = { up: 'up', down: '&darr;', none: '' }
+    ARROWS = { up: '&uarr;', down: '&darr;', none: '' }
 
     # TODO: This shouldn't necessarily return a currency representation.
     def difference(**options)
@@ -39,11 +39,11 @@ module Comparison
     def arrow
       case
       when positive?
-        t 'comparison.arrows.up_html', default: ARROWS[:up]
+        t 'comparison.arrows.positive_html', default: ARROWS[:up]
       when negative?
-        t 'comparison.arrows.down_html', default: ARROWS[:down]
+        t 'comparison.arrows.negative_html', default: ARROWS[:down]
       else
-        t 'comparison.arrows.none_html', default: ARROWS[:none]
+        t 'comparison.arrows.nochange_html', default: ARROWS[:none]
       end
     end
 
@@ -57,5 +57,15 @@ module Comparison
     # The #css method will generate CSS styles that can be passed to the style
     # attribute of a tag, suitable for limited functionality views such as HTML
     # email.
+    def css
+      case
+      when positive?
+        t 'comparison.css.positive', default: ''
+      when negative?
+        t 'comparison.css.negative', default: ''
+      else
+        t 'comparison.css.nochange', default: ''
+      end
+    end
   end
 end

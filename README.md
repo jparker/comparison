@@ -58,9 +58,9 @@ TODO: Write more about I18n.
 en:
   comparison:
     arrows:
-      up_html: '&uarr;'
-      down_html: '&darr;'
-      none_html: ''
+      positive_html: '&uarr;'
+      negative_html: '&darr;'
+      nochange_html: ''
 ```
 
 ## Installation

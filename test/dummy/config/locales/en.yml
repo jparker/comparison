@@ -24,4 +24,4 @@ en:
 
   comparison:
     arrows:
-      none_html: 'NC (overridden in test/dummy/config/locales/en.yml)'
+      nochange_html: 'NC (overridden in test/dummy/config/locales/en.yml)'
