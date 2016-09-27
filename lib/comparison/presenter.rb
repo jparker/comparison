@@ -10,6 +10,7 @@ module Comparison
 
     ARROWS = { up: 'up', down: '&darr;', none: '' }
 
+    # TODO: This shouldn't necessarily return a currency representation.
     def difference(**options)
       if positive?
         number_to_currency absolute, format: '+%u%n', **options

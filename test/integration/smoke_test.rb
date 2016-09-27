@@ -19,7 +19,7 @@ class SmokeTest < ActionDispatch::IntegrationTest
     assert_select 'tr:nth-child(3)' do
       assert_select 'td:nth-child(1)', '$0.00'
       assert_select 'td:nth-child(2)', '0%'
-      assert_select 'td:nth-child(3)', ''
+      assert_select 'td:nth-child(3)', 'NC (overridden in test/dummy/config/locales/en.yml)'
     end
 
     assert_select 'tr:nth-child(4)' do

@@ -21,3 +21,7 @@
 
 en:
   hello: "Hello world"
+
+  comparison:
+    arrows:
+      none_html: 'NC (overridden in test/dummy/config/locales/en.yml)'

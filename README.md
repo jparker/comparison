@@ -34,7 +34,7 @@ or, for no change, an empty string).
 <%= compare m, n do |cmp| %>
   <td><%= number_to_currency m %></td>
   <td><%= number_to_currency n %></td>
-  <td><%= number_to_currency cmp.difference %></td>
+  <td><%= cmp.difference %></td>
   <td>
     <%= cmp.arrow %>
     <%= cmp.percentage precision: 1 %>
@@ -47,13 +47,21 @@ or, for no change, an empty string).
 | Q4 2016 | $200.00 |  $50.00 | +$150.00 | &uarr;+300.0% |
 | Q3 2016 | $125.00 | $100.00 |  +$25.00 |  &uarr;+25.0% |
 | Q2 2016 | $100.00 | $125.00 |  -$25.00 |  &darr;-20.0% |
-| Q1 2016 | $100.00 |   $0.00 | +$100.00 | &uarr;&mdash; |
+| Q1 2016 | $100.00 |   $0.00 | +$100.00 |        &uarr; |
 | Q4 2015 | $75.00  |  $75.00 |    $0.00 |          0.0% |
 | Q3 2015 | $0.00   |   $0.00 |    $0.00 |          0.0% |
 
-## TODO
-Add some global configuration management to let applications specify the
-presentation specifics (character entity to use for `#arrow`, etc.)
+## Configuration
+TODO: Write more about I18n.
+
+```yml
+en:
+  comparison:
+    arrows:
+      up_html: '&uarr;'
+      down_html: '&darr;'
+      none_html: ''
+```
 
 ## Installation
 Add this line to your application's Gemfile:
