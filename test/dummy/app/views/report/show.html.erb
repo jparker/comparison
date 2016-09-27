@@ -1,0 +1,30 @@
+<table>
+  <tr>
+    <%- compare 75, 100 do |cmp| %>
+      <td><%= cmp.difference %></td>
+      <td><%= cmp.percentage %></td>
+      <td><%= cmp.arrow %></td>
+    <% end %>
+  </tr>
+  <tr>
+    <%- compare 100, 75 do |cmp| %>
+      <td><%= cmp.difference %></td>
+      <td><%= cmp.percentage %></td>
+      <td><%= cmp.arrow %></td>
+    <% end %>
+  </tr>
+  <tr>
+    <%- compare 75, 75 do |cmp| %>
+      <td><%= cmp.difference %></td>
+      <td><%= cmp.percentage %></td>
+      <td><%= cmp.arrow %></td>
+    <% end %>
+  </tr>
+  <tr>
+    <%- compare 75, 0 do |cmp| %>
+      <td><%= cmp.difference %></td>
+      <td><%= cmp.percentage || raw('&mdash;') %></td>
+      <td><%= cmp.arrow %></td>
+    <% end %>
+  </tr>
+</table>

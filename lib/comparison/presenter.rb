@@ -1,9 +1,14 @@
+# frozen-string-literal: true
+
 require 'delegate'
 require 'forwardable'
 
 module Comparison
   class Presenter < DelegateClass(Comparator)
     extend Forwardable
+    include ActionView::Helpers::TranslationHelper
+
+    ARROWS = { up: 'up', down: '&darr;', none: '' }
 
     def difference(**options)
       if positive?
@@ -33,11 +38,11 @@ module Comparison
     def arrow
       case
       when positive?
-        '&uarr;'.html_safe
+        t 'comparison.arrows.up_html', default: ARROWS[:up]
       when negative?
-        '&darr;'.html_safe
+        t 'comparison.arrows.down_html', default: ARROWS[:down]
       else
-        nil
+        t 'comparison.arrows.none_html', default: ARROWS[:none]
       end
     end
 

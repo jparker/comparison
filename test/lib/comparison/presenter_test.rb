@@ -71,7 +71,7 @@ module Comparison
 
     def test_arrow_no_change
       cmp = Presenter.new Comparator.new 75, 75
-      assert_nil cmp.arrow
+      assert_equal '', cmp.arrow
     end
   end
 end

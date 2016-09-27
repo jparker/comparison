@@ -1,0 +1,6 @@
+en:
+  comparison:
+    arrows:
+      up_html:   '&uarr;'
+      down_html: '&darr;'
+      none_html: ''
