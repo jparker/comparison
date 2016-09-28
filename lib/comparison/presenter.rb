@@ -13,7 +13,7 @@ module Comparison
     # TODO: This shouldn't necessarily return a currency representation.
 
     ##
-    # Returns `Comparator#absolute` presented as currency.
+    # Returns Comparator#absolute presented as currency.
     def difference(**options)
       if positive?
         number_to_currency absolute, format: '+%u%n', **options
@@ -23,7 +23,7 @@ module Comparison
     end
 
     ##
-    # Returns `Comparator#relative` formatted as a percentage.
+    # Returns Comparator#relative formatted as a percentage.
     #
     # If the relative percentage evaluates to Infinity or -Infinity, +nil+ is
     # returned. If it evaluates to NaN, 0 is returned.
