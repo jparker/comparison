@@ -1,3 +1,5 @@
+# [![Gem Version](https://badge.fury.io/rb/comparison.svg)](https://badge.fury.io/rb/comparison) [![Build Status](https://travis-ci.org/jparker/comparison.svg?branch=master)](https://travis-ci.org/jparker/comparison)
+
 # Comparison
 
 I have often found myself implementing reporting features that compare two
