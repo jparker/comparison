@@ -49,7 +49,7 @@ module Comparison
     delegate %i[number_to_currency number_to_percentage] => :'ActiveSupport::NumberHelper'
 
     ##
-    # Returns the I18n translation for `comparison.icons`. (See also `#arrow`.)
+    # Returns the I18n translation for `comparison.icons`. (See also #arrow.)
     #
     # This method is intended to display a graphical representation of the
     # comparison. Typically this would be an arrow pointing up or down.
@@ -61,12 +61,12 @@ module Comparison
     # with Bootstrap, you could add the following translations to your
     # application:
     #
-    # en:
-    #   comparison:
-    #     icons:
-    #       positive_html: '<span class="glyphicon glyphicon-arrow-up"></span>'
-    #       negative_html: '<span class="glyphicon glyphicon-arrow-down"></span>'
-    #       nochange_html: '<span class="glyphicon glyphicon-minus"></span>'
+    #     en:
+    #       comparison:
+    #         icons:
+    #           positive_html: '<span class="glyphicon glyphicon-arrow-up"></span>'
+    #           negative_html: '<span class="glyphicon glyphicon-arrow-down"></span>'
+    #           nochange_html: '<span class="glyphicon glyphicon-minus"></span>'
     def icon
       case
       when positive?
@@ -79,35 +79,35 @@ module Comparison
     end
 
     ##
-    # Returns the I18n translation for `comparison.icons`. (See also `#icon`.)
+    # Returns the I18n translation for `comparison.icons`. (See also #icon.)
     #
     # This method is intended to display a graphical representation of the
     # comparison. Typically this would be an arrow pointing up or down.
     #
     # The default implementation is as follows:
     #
-    # en:
-    #   comparison:
-    #     arrows:
-    #       positive_html: '&uarr;'
-    #       negative_html: '&darr;'
-    #       nochange_html: ''
+    #     en:
+    #       comparison:
+    #         arrows:
+    #           positive_html: '&uarr;'
+    #           negative_html: '&darr;'
+    #           nochange_html: ''
     #
     # For example, to generate up and down arrows using Glyphicons included
     # with Bootstrap, you could add the following translations to your
     # application:
     #
-    # `#arrows` and its sister method `#icon` perform roughly identical tasks
-    # with roughly identical intentions. The difference between the two methods
-    # is in the context in which they are intended to be used.
+    # #arrows and its sister method #icon perform roughly identical tasks with
+    # roughly identical intentions. The difference between the two methods is
+    # in the context in which they are intended to be used.
     #
-    # `#arrows` is meant to be used from view contexts with limited
-    # functionality such as an HTML email. As such, the translations you
-    # specify should be simple enough, like HTML character entities, to work
-    # within said view context.
+    # #arrows is meant to be used from view contexts with limited functionality
+    # such as an HTML email. As such, the translations you specify should be
+    # simple enough, like HTML character entities, to work within said view
+    # context.
     #
-    # `#icons` is meant to be used from full-featured view contexts. As such,
-    # `#icons` is the one to use to generate HTML tags.
+    # #icons is meant to be used from full-featured view contexts. As such,
+    # #icons is the one to use to generate HTML tags.
     def arrow
       case
       when positive?
@@ -120,31 +120,31 @@ module Comparison
     end
 
     ##
-    # Returns the I18n translation for `comparison.classes`. (See also `#css`.)
+    # Returns the I18n translation for `comparison.classes`. (See also #css.)
     #
     # Use these translations to specify CSS classes for tags that contain
     # comparison data. For example:
     #
-    # en:
-    #   comparison:
-    #     classes:
-    #       positive: 'comparison positive'
-    #       negative: 'comparison negative'
-    #       nochange: 'comparison nochange'
+    #     en:
+    #       comparison:
+    #         classes:
+    #           positive: 'comparison positive'
+    #           negative: 'comparison negative'
+    #           nochange: 'comparison nochange'
     #
-    # .comparison.positive {
-    #   color: #3c763d;
-    #   background-color: #dff0d8;
-    # }
-    # .comparison.negative {
-    #   color: #a94442;
-    #   background-color: #f2dede;
-    # }
-    # .comparison.nochange {
-    #   color: #777777;
-    # }
+    #     .comparison.positive {
+    #       color: #3c763d;
+    #       background-color: #dff0d8;
+    #     }
+    #     .comparison.negative {
+    #       color: #a94442;
+    #       background-color: #f2dede;
+    #     }
+    #     .comparison.nochange {
+    #       color: #777777;
+    #     }
     #
-    # content_tag cmp.difference, class: cmp.classes
+    #     content_tag cmp.difference, class: cmp.classes
     def classes
       case
       when positive?
@@ -157,24 +157,24 @@ module Comparison
     end
 
     ##
-    # Returns the I18n translation for `comparison.css`. (See also `#classes`.)
+    # Returns the I18n translation for `comparison.css`. (See also #classes.)
     #
     # Use these translations to specify raw CSS style rules to be used when
     # formatting comparison data. For example:
     #
-    # en:
-    #   comparison:
-    #     css:
-    #       positive: 'color: #3c763d; background-color: #dff0d8;'
-    #       negative: 'color: #a94442; background-color: #f2dede;'
-    #       nochange: 'color: #777777;'
+    #     en:
+    #       comparison:
+    #         css:
+    #           positive: 'color: #3c763d; background-color: #dff0d8;'
+    #           negative: 'color: #a94442; background-color: #f2dede;'
+    #           nochange: 'color: #777777;'
     #
-    # content_tag cmp.difference, style: cmp.css
+    #     content_tag cmp.difference, style: cmp.css
     #
-    # `#css` and its sister method `#classes` perform very similar tasks. Use
-    # `#css` when you need to embed the CSS style rules in an HTML tag using
-    # the style attribute. Use `#classes` when you want have the CSS style
-    # rules defined in a class and want to add that class to the HTML tag.
+    # #css and its sister method #classes perform very similar tasks. Use #css
+    # when you need to embed the CSS style rules in an HTML tag using the style
+    # attribute. Use #classes when you want have the CSS style rules defined in
+    # a class and want to add that class to the HTML tag.
     def css
       case
       when positive?
