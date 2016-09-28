@@ -35,6 +35,9 @@ module Comparison
       end
     end
 
+    alias_method :change, :percentage
+    deprecate :change
+
     delegate %i[number_to_currency number_to_percentage] => :'ActiveSupport::NumberHelper'
 
     def icon
