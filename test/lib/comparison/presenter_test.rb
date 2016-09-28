@@ -66,33 +66,6 @@ module Comparison
       assert_equal '33%', cmp.percentage(format: '%n%')
     end
 
-    def test_arrow_negative
-      arrow = '&darr;'
-      I18n.backend.store_translations :en,
-        { comparison: { arrows: { negative_html: arrow } } }
-      cmp = negative
-      assert_equal arrow, cmp.arrow
-      assert cmp.arrow.html_safe?, 'Comparator#arrow should be html-safe'
-    end
-
-    def test_arrow_positive
-      arrow = '&uarr;'
-      I18n.backend.store_translations :en,
-        { comparison: { arrows: { positive_html: arrow } } }
-      cmp = positive
-      assert_equal arrow, cmp.arrow
-      assert cmp.arrow.html_safe?, 'Comparator#arrow should be html-safe'
-    end
-
-    def test_arrow_no_change
-      arrow = ''
-      I18n.backend.store_translations :en,
-        { comparison: { arrows: { nochange_html: arrow } } }
-      cmp = nochange
-      assert_equal arrow, cmp.arrow
-      assert cmp.arrow.html_safe?, 'Comparator#arrow should be html-safe'
-    end
-
     def test_icon_negative
       icon = '<span class="glyphicon glyphicon-arrow-down"></span>'
       I18n.backend.store_translations :en,
@@ -118,6 +91,33 @@ module Comparison
       cmp = nochange
       assert_equal icon, cmp.icon
       assert cmp.icon.html_safe?, 'Comparator#icon should be html-safe'
+    end
+
+    def test_arrow_negative
+      arrow = '&darr;'
+      I18n.backend.store_translations :en,
+        { comparison: { arrows: { negative_html: arrow } } }
+      cmp = negative
+      assert_equal arrow, cmp.arrow
+      assert cmp.arrow.html_safe?, 'Comparator#arrow should be html-safe'
+    end
+
+    def test_arrow_positive
+      arrow = '&uarr;'
+      I18n.backend.store_translations :en,
+        { comparison: { arrows: { positive_html: arrow } } }
+      cmp = positive
+      assert_equal arrow, cmp.arrow
+      assert cmp.arrow.html_safe?, 'Comparator#arrow should be html-safe'
+    end
+
+    def test_arrow_no_change
+      arrow = ''
+      I18n.backend.store_translations :en,
+        { comparison: { arrows: { nochange_html: arrow } } }
+      cmp = nochange
+      assert_equal arrow, cmp.arrow
+      assert cmp.arrow.html_safe?, 'Comparator#arrow should be html-safe'
     end
 
     def test_classes_negative

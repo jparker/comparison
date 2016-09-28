@@ -17,18 +17,18 @@ actual math, the Presenter class for decorating the Comparison with
 view-friendly output, and a helper module for using the Presenter with the
 view.
 
-The `#compare` helper takes the two numbers to be compared and yields the
+`#compare` helper takes the two numbers to be compared and yields the
 Comparison presenter to a block.
 
-The `#difference` method provides the absolute difference between the two
-numbers, literally `m - n`.
+`#difference` provides the absolute difference between the two numbers,
+literally `m - n`.
 
-The `#percentage` method provides the percentage difference between the two
-numbers. It uses `#number_to_percentage` under the hood, and passes options
-through.
+`#percentage` provides the percentage difference between the two numbers. Under
+the hood it uses `ActionView::Helpers::NumberHelper#number_to_percentage` to
+format the percentage. Options are passed through to that method.
 
-The `#arrow` method returns an HTML character entity for an arrow (up, down,
-or, for no change, an empty string).
+`#arrow` returns an HTML character entity for an arrow (up, down, or, for no
+change, an empty string).
 
 ```erb
 <%= compare m, n do |cmp| %>
@@ -51,8 +51,11 @@ or, for no change, an empty string).
 | Q4 2015 | $75.00  |  $75.00 |    $0.00 |          0.0% |
 | Q3 2015 | $0.00   |   $0.00 |    $0.00 |          0.0% |
 
+
 ## Configuration
-TODO: Write more about I18n.
+Comparison uses I18n to configure the output of some of the Presenter methods.
+Default implementations are provided where it makes sense. You can provide your
+own implementations by adding translations to your application.
 
 ```yml
 en:
@@ -97,4 +100,5 @@ Open an GitHub issue for problems and suggestions. This library is in its
 infancy, so use it at your own risk.
 
 ## License
-The gem is available as open source under the terms of the [MIT License](http://opensource.org/licenses/MIT).
+The gem is available as open source under the terms of the
+[MIT License](http://opensource.org/licenses/MIT).
