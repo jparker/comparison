@@ -93,6 +93,57 @@ module Comparison
       assert cmp.arrow.html_safe?, 'Comparator#arrow should be html-safe'
     end
 
+    def test_icon_negative
+      icon = '<span class="glyphicon glyphicon-arrow-down"></span>'
+      I18n.backend.store_translations :en,
+        { comparison: { icons: { negative_html:  icon } } }
+      cmp = negative
+      assert_equal icon, cmp.icon
+      assert cmp.icon.html_safe?, 'Comparator#icon should be html-safe'
+    end
+
+    def test_icon_positive
+      icon = '<span class="glyphicon glyphicon-arrow-up"></span>'
+      I18n.backend.store_translations :en,
+        { comparison: { icons: { positive_html:  icon } } }
+      cmp = positive
+      assert_equal icon, cmp.icon
+      assert cmp.icon.html_safe?, 'Comparator#icon should be html-safe'
+    end
+
+    def test_icon_no_change
+      icon = '<span class="glyphicon glyphicon-minus"></span>'
+      I18n.backend.store_translations :en,
+        { comparison: { icons: { nochange_html:  icon } } }
+      cmp = nochange
+      assert_equal icon, cmp.icon
+      assert cmp.icon.html_safe?, 'Comparator#icon should be html-safe'
+    end
+
+    def test_classes_negative
+      classes = 'comparison negative'
+      I18n.backend.store_translations :en,
+        { comparison: { classes: { negative: classes } } }
+      cmp = negative
+      assert_equal classes, cmp.classes
+    end
+
+    def test_classes_positive
+      classes = 'comparison positive'
+      I18n.backend.store_translations :en,
+        { comparison: { classes: { positive: classes } } }
+      cmp = positive
+      assert_equal classes, cmp.classes
+    end
+
+    def test_classes_no_change
+      classes = 'comparison nochange'
+      I18n.backend.store_translations :en,
+        { comparison: { classes: { nochange: classes } } }
+      cmp = nochange
+      assert_equal classes, cmp.classes
+    end
+
     def test_css_negative
       css = 'color: #a94442; background-color: #f2dede;'
       I18n.backend.store_translations :en,

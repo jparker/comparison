@@ -18,6 +18,8 @@ module Comparison
       @absolute ||= m - n
     end
 
+    alias_method :difference, :absolute
+
     def relative
       @relative ||= if n.negative?
                       (1 - m / n) * 100
@@ -25,5 +27,7 @@ module Comparison
                       (m / n - 1) * 100
                     end
     end
+
+    alias_method :percentage, :relative
   end
 end

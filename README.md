@@ -57,6 +57,18 @@ TODO: Write more about I18n.
 ```yml
 en:
   comparison:
+    classes:
+      positive: 'comparison positive'
+      negative: 'comparison negative'
+      nochange: 'comparison nochange'
+    css:
+      positive_html: 'color: #3c763d; background-color: #dff0d8;'
+      negative_html: 'color: #a94442; background-color: #f2dede;'
+      nochange_html: 'color: #777777;'
+    icons:
+      positive_html: '<span class="glyphicon glyphicon-arrow-up"></span>'
+      negative_html: '<span class="glyphicon glyphicon-arrow-down"></span>'
+      nochange_html: '<span class="glyphicon glyphicon-minus"></span>'
     arrows:
       positive_html: '&uarr;'
       negative_html: '&darr;'

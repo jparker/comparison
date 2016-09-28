@@ -1,10 +1,18 @@
 en:
   comparison:
-    arrows:
-      positive_html: '&uarr;'
-      negative_html: '&darr;'
-      nochange_html: ''
+    # classes:
+    #   positive: 'comparison positive'
+    #   negative: 'comparison negative'
+    #   nochange: 'comparison nochange'
     css:
       positive_html: ''
       negative_html: ''
+      nochange_html: ''
+    # icons:
+    #   positive_html: '<span class="glyphicon glyphicon-arrow-up"></span>'
+    #   negative_html: '<span class="glyphicon glyphicon-arrow-down"></span>'
+    #   nochange_html: '<span class="glyphicon glyphicon-minus"></span>'
+    arrows:
+      positive_html: '&uarr;'
+      negative_html: '&darr;'
       nochange_html: ''

@@ -24,6 +24,7 @@ module Comparison
       when nan? || zero?
         number_to_percentage 0, precision: precision, **options
       when infinite?
+        # TODO: Return nil, or lookup an optional representation in I18n?
         nil
       when positive?
         number_to_percentage relative, delimiter: delimiter,
@@ -36,6 +37,17 @@ module Comparison
 
     delegate %i[number_to_currency number_to_percentage] => :'ActiveSupport::NumberHelper'
 
+    def icon
+      case
+      when positive?
+        t 'comparison.icons.positive_html'
+      when negative?
+        t 'comparison.icons.negative_html'
+      else
+        t 'comparison.icons.nochange_html'
+      end
+    end
+
     def arrow
       case
       when positive?
@@ -47,16 +59,17 @@ module Comparison
       end
     end
 
-    # TODO: #icon
-    # The #arrow method generates simple HTML character entities suitable for
-    # limited funcationality views like HTML email. The #icon method will
-    # return more complex graphical arrow suitable for first-class browser
-    # views.
+    def classes
+      case
+      when positive?
+        t 'comparison.classes.positive'
+      when negative?
+        t 'comparison.classes.negative'
+      else
+        t 'comparison.classes.nochange'
+      end
+    end
 
-    # TODO: #css
-    # The #css method will generate CSS styles that can be passed to the style
-    # attribute of a tag, suitable for limited functionality views such as HTML
-    # email.
     def css
       case
       when positive?
@@ -67,5 +80,7 @@ module Comparison
         t 'comparison.css.nochange', default: ''
       end
     end
+
+    alias_method :style, :css
   end
 end
