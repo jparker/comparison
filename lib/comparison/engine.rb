@@ -3,7 +3,7 @@ module Comparison
     isolate_namespace Comparison
 
     initializer 'comparison.view_helpers' do
-      ActionView::Base.send :include, ApplicationHelper
+      ActionView::Base.send :include, helpers
     end
   end
 end
