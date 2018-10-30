@@ -4,15 +4,23 @@ require 'bigdecimal'
 require 'forwardable'
 
 module Comparison
+  ##
+  # The Comparator object compares two numbers to each other and exposes the
+  # raw and percentage differences.
   class Comparator
     extend Forwardable
 
     ##
     # Instantiates a new Comparator to compare two numbers, +m+ and +n+.
+    #
+    # Both numbers will be converted to instances of `BigDecimal`.
+    #
+    # rubocop:disable Naming/UncommunicativeMethodParamName
     def initialize(m, n)
       @m = m.to_d
       @n = n.to_d
     end
+    # rubocop:enable Naming/UncommunicativeMethodParamName
 
     attr_reader :m, :n
 
@@ -24,7 +32,7 @@ module Comparison
       @absolute ||= m - n
     end
 
-    alias_method :difference, :absolute
+    alias difference absolute
 
     ##
     # Returns the percentage difference of +@m+ to +@n+.
@@ -36,6 +44,6 @@ module Comparison
                     end
     end
 
-    alias_method :percentage, :relative
+    alias percentage relative
   end
 end

@@ -1,6 +1,6 @@
 # frozen-string-literal: true
 
-$:.push File.expand_path('lib', __dir__)
+$LOAD_PATH.push File.expand_path 'lib', __dir__
 
 # Maintain your gem's version:
 require 'comparison/version'
@@ -16,7 +16,9 @@ Gem::Specification.new do |s|
   s.description = 'Helpers for displaying details of comparing two numbers.'
   s.license     = 'MIT'
 
+  # rubocop:disable Metrics/LineLength
   s.files = Dir['{app,config,db,lib}/**/*', 'MIT-LICENSE', 'Rakefile', 'README.md']
+  # rubocop:enable Metrics/LineLength
 
   s.required_ruby_version = '>= 2.3'
 
@@ -24,4 +26,5 @@ Gem::Specification.new do |s|
 
   s.add_development_dependency 'minitest-focus'
   s.add_development_dependency 'pry'
+  s.add_development_dependency 'rubocop'
 end

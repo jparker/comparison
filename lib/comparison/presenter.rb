@@ -1,14 +1,15 @@
 # frozen-string-literal: true
 
 require 'delegate'
-require 'forwardable'
 
 module Comparison
+  ##
+  # The Presenter object wraps a Comparator with methods that return
+  # view-friendly output.
   class Presenter < DelegateClass(Comparator)
-    extend Forwardable
     include ActionView::Helpers::TranslationHelper
 
-    ARROWS = { up: '&uarr;', down: '&darr;', none: '' }
+    ARROWS = { up: '&uarr;', down: '&darr;', none: '' }.freeze
 
     # TODO: This shouldn't necessarily return a currency representation.
 
@@ -27,27 +28,23 @@ module Comparison
     #
     # If the relative percentage evaluates to Infinity or -Infinity, +nil+ is
     # returned. If it evaluates to NaN, 0 is returned.
-    def percentage(delimiter: ',', precision: 0, **options)
-      case
-      when nan? || zero?
-        number_to_percentage 0, precision: precision, **options
-      when infinite?
+    def percentage(**options)
+      if nan? || zero?
+        number_to_percentage 0, **options
+      elsif infinite?
         # TODO: Return nil, or lookup an optional representation in I18n?
         nil
-      when positive?
-        number_to_percentage relative, delimiter: delimiter,
-          precision: precision, format: '+%n%', **options
+      elsif positive?
+        number_to_percentage relative, format: '+%n%', **options
       else
-        number_to_percentage relative, delimiter: delimiter,
-          precision: precision, **options
+        number_to_percentage relative, **options
       end
     end
 
-    alias_method :change, :percentage
+    alias change percentage
     deprecate :change
 
-    delegate %i[number_to_currency number_to_percentage] => :'ActiveSupport::NumberHelper'
-
+    # rubocop:disable Metrics/LineLength
     ##
     # Returns the I18n translation for `comparison.icons`. (See also #arrow.)
     #
@@ -67,11 +64,12 @@ module Comparison
     #           positive_html: '<span class="glyphicon glyphicon-arrow-up"></span>'
     #           negative_html: '<span class="glyphicon glyphicon-arrow-down"></span>'
     #           nochange_html: '<span class="glyphicon glyphicon-minus"></span>'
+    #
+    # rubocop:enable Metrics/LineLength
     def icon
-      case
-      when positive?
+      if positive?
         t 'comparison.icons.positive_html'
-      when negative?
+      elsif negative?
         t 'comparison.icons.negative_html'
       else
         t 'comparison.icons.nochange_html'
@@ -109,10 +107,9 @@ module Comparison
     # #icons is meant to be used from full-featured view contexts. As such,
     # #icons is the one to use to generate HTML tags.
     def arrow
-      case
-      when positive?
+      if positive?
         t 'comparison.arrows.positive_html', default: ARROWS[:up]
-      when negative?
+      elsif negative?
         t 'comparison.arrows.negative_html', default: ARROWS[:down]
       else
         t 'comparison.arrows.nochange_html', default: ARROWS[:none]
@@ -148,10 +145,9 @@ module Comparison
     #
     # TODO: Rename this to css?
     def classes
-      case
-      when positive?
+      if positive?
         t 'comparison.classes.positive'
-      when negative?
+      elsif negative?
         t 'comparison.classes.negative'
       else
         t 'comparison.classes.nochange'
@@ -180,16 +176,28 @@ module Comparison
     #
     # TODO: Rename this to style?
     def css
-      case
-      when positive?
+      if positive?
         t 'comparison.css.positive', default: ''
-      when negative?
+      elsif negative?
         t 'comparison.css.negative', default: ''
       else
         t 'comparison.css.nochange', default: ''
       end
     end
 
-    alias_method :style, :css
+    alias style css
+
+    private
+
+    def number_to_percentage(value, delimiter: ',', precision: 0, **options)
+      ActiveSupport::NumberHelper.number_to_percentage value,
+        delimiter: delimiter,
+        precision: precision,
+        **options
+    end
+
+    def number_to_currency(*args)
+      ActiveSupport::NumberHelper.number_to_currency(*args)
+    end
   end
 end

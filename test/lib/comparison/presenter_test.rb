@@ -1,9 +1,14 @@
+# frozen-string-literal: true
+
 require 'test_helper'
 
 module Comparison
+  # rubocop:disable Metrics/ClassLength
   class PresenterTest < ActiveSupport::TestCase
     def setup
+      # rubocop:disable Style/ParallelAssignment
       @backend, I18n.backend = I18n.backend, I18n::Backend::KeyValue.new({})
+      # rubocop:enable Style/ParallelAssignment
       I18n.enforce_available_locales = false
     end
 
@@ -69,7 +74,7 @@ module Comparison
     def test_icon_negative
       icon = '<span class="glyphicon glyphicon-arrow-down"></span>'
       I18n.backend.store_translations :en,
-        { comparison: { icons: { negative_html:  icon } } }
+        comparison: { icons: { negative_html:  icon } }
       cmp = negative
       assert_equal icon, cmp.icon
       assert cmp.icon.html_safe?, 'Comparator#icon should be html-safe'
@@ -78,7 +83,7 @@ module Comparison
     def test_icon_positive
       icon = '<span class="glyphicon glyphicon-arrow-up"></span>'
       I18n.backend.store_translations :en,
-        { comparison: { icons: { positive_html:  icon } } }
+        comparison: { icons: { positive_html:  icon } }
       cmp = positive
       assert_equal icon, cmp.icon
       assert cmp.icon.html_safe?, 'Comparator#icon should be html-safe'
@@ -87,7 +92,7 @@ module Comparison
     def test_icon_no_change
       icon = '<span class="glyphicon glyphicon-minus"></span>'
       I18n.backend.store_translations :en,
-        { comparison: { icons: { nochange_html:  icon } } }
+        comparison: { icons: { nochange_html:  icon } }
       cmp = nochange
       assert_equal icon, cmp.icon
       assert cmp.icon.html_safe?, 'Comparator#icon should be html-safe'
@@ -96,7 +101,7 @@ module Comparison
     def test_arrow_negative
       arrow = '&darr;'
       I18n.backend.store_translations :en,
-        { comparison: { arrows: { negative_html: arrow } } }
+        comparison: { arrows: { negative_html: arrow } }
       cmp = negative
       assert_equal arrow, cmp.arrow
       assert cmp.arrow.html_safe?, 'Comparator#arrow should be html-safe'
@@ -105,7 +110,7 @@ module Comparison
     def test_arrow_positive
       arrow = '&uarr;'
       I18n.backend.store_translations :en,
-        { comparison: { arrows: { positive_html: arrow } } }
+        comparison: { arrows: { positive_html: arrow } }
       cmp = positive
       assert_equal arrow, cmp.arrow
       assert cmp.arrow.html_safe?, 'Comparator#arrow should be html-safe'
@@ -114,7 +119,7 @@ module Comparison
     def test_arrow_no_change
       arrow = ''
       I18n.backend.store_translations :en,
-        { comparison: { arrows: { nochange_html: arrow } } }
+        comparison: { arrows: { nochange_html: arrow } }
       cmp = nochange
       assert_equal arrow, cmp.arrow
       assert cmp.arrow.html_safe?, 'Comparator#arrow should be html-safe'
@@ -123,7 +128,7 @@ module Comparison
     def test_classes_negative
       classes = 'comparison negative'
       I18n.backend.store_translations :en,
-        { comparison: { classes: { negative: classes } } }
+        comparison: { classes: { negative: classes } }
       cmp = negative
       assert_equal classes, cmp.classes
     end
@@ -131,7 +136,7 @@ module Comparison
     def test_classes_positive
       classes = 'comparison positive'
       I18n.backend.store_translations :en,
-        { comparison: { classes: { positive: classes } } }
+        comparison: { classes: { positive: classes } }
       cmp = positive
       assert_equal classes, cmp.classes
     end
@@ -139,7 +144,7 @@ module Comparison
     def test_classes_no_change
       classes = 'comparison nochange'
       I18n.backend.store_translations :en,
-        { comparison: { classes: { nochange: classes } } }
+        comparison: { classes: { nochange: classes } }
       cmp = nochange
       assert_equal classes, cmp.classes
     end
@@ -147,7 +152,7 @@ module Comparison
     def test_css_negative
       css = 'color: #a94442; background-color: #f2dede;'
       I18n.backend.store_translations :en,
-        { comparison: { css: { negative: css } } }
+        comparison: { css: { negative: css } }
       cmp = negative
       assert_equal css, cmp.css
     end
@@ -155,7 +160,7 @@ module Comparison
     def test_css_positive
       css = 'color: #3c763d; background-color: #dff0d8;'
       I18n.backend.store_translations :en,
-        { comparison: { css: { positive: css } } }
+        comparison: { css: { positive: css } }
       cmp = positive
       assert_equal css, cmp.css
     end
@@ -163,7 +168,7 @@ module Comparison
     def test_css_no_change
       css = 'color: #777777;'
       I18n.backend.store_translations :en,
-        { comparison: { css: { nochange: css } } }
+        comparison: { css: { nochange: css } }
       cmp = nochange
       assert_equal css, cmp.css
     end
@@ -180,8 +185,11 @@ module Comparison
       presenter 75, 75
     end
 
+    # rubocop:disable Naming/UncommunicativeMethodParamName
     def presenter(m, n)
       Presenter.new Comparator.new m, n
     end
+    # rubocop:enable Naming/UncommunicativeMethodParamName
   end
+  # rubocop:enable Metrics/ClassLength
 end

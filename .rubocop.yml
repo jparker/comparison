@@ -1,0 +1,7 @@
+AllCops:
+  Exclude:
+    - 'test/dummy/**/*'
+    - 'bin/rails'
+  TargetRubyVersion: 2.3.0
+Layout/AlignParameters:
+  Enabled: false

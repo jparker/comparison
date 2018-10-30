@@ -1,7 +1,7 @@
 # frozen-string-literal: true
 
 module Comparison
-  class Engine < ::Rails::Engine
+  class Engine < ::Rails::Engine # :nodoc:
     isolate_namespace Comparison
 
     initializer 'comparison.view_helpers' do
