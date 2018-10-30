@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    comparison (0.1.0)
+    comparison (0.1.99)
       rails (>= 4.0, < 6.0)
 
 GEM
