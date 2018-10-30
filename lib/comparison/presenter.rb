@@ -145,6 +145,8 @@ module Comparison
     #     }
     #
     #     content_tag cmp.difference, class: cmp.classes
+    #
+    # TODO: Rename this to css?
     def classes
       case
       when positive?
@@ -175,6 +177,8 @@ module Comparison
     # when you need to embed the CSS style rules in an HTML tag using the style
     # attribute. Use #classes when you want have the CSS style rules defined in
     # a class and want to add that class to the HTML tag.
+    #
+    # TODO: Rename this to style?
     def css
       case
       when positive?

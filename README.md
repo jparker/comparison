@@ -2,18 +2,17 @@
 
 # Comparison
 
-I have often found myself implementing reporting features that compare two
-numbers to each other. For example, a report that compares the outcome for a
-quarter to the outcome of the same quarter in the prior year. Frequently I end
-up displaying both the raw difference between the two numbers, the percentage
-difference, and maybe a simple visual indicator such as an arrow (pointing up
-or down). Sometimes these comparisons require special handling for Infinity and
-NaN when one or both numbers are zero.
+Comparison bundles up into Rails helpers the logic for rendering visually
+informative comparisons of numbers. For example, say you were comparing the
+sales figures from one quarter to the same quarter in a previous year. You
+might want to show the percentage change, accompanied by an arrow or icon and
+color-coded to indicate positive or negative growth. This plugin provides
+helpers that abstract the logic of deciding what to show into a handful of
+simple methods and leveraging I18n.
 
-I've tackled this task enough times and in enough applications that I felt it
-would simplify my life to extract and package the code for future re-use.
 
 ## Usage
+
 The library has three components: the Comparison class for performing the
 actual math, the Presenter class for decorating the Comparison with
 view-friendly output, and a helper module for using the Presenter with the
@@ -55,6 +54,7 @@ change, an empty string).
 
 
 ## Configuration
+
 Comparison uses I18n to configure the output of some of the Presenter methods.
 Default implementations are provided where it makes sense. You can provide your
 own implementations by adding translations to your application.
@@ -81,6 +81,7 @@ en:
 ```
 
 ## Installation
+
 Add this line to your application's Gemfile:
 
 ```ruby
@@ -98,9 +99,11 @@ $ gem install comparison
 ```
 
 ## Contributing
+
 Open an GitHub issue for problems and suggestions. This library is in its
 infancy, so use it at your own risk.
 
 ## License
+
 The gem is available as open source under the terms of the
 [MIT License](http://opensource.org/licenses/MIT).
