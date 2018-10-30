@@ -10,6 +10,20 @@ color-coded to indicate positive or negative growth. This plugin provides
 helpers that abstract the logic of deciding what to show into a handful of
 simple methods and leveraging I18n.
 
+## Upgrade Notes
+
+This gem has been getting a facelift, and this has resulted in some changes
+from the old behavior.
+
+`Comparison::Presenter#classes` has been renamed to
+`Comparison::Presenter#dom_classes`, and `Comparison::Presenter#css` has been
+renamed to `Comparison::Presenter#style`. The old method names continue to
+work, but they will emit deprecation warnings.
+
+The I18n keys used by the above methods have been similarly renamed, but the
+methods will continue to fall back on the old keys. Going forward, use
+`comparison.dom_classes` instead of `comparison.classes` and `comparison.style`
+instead of `comparison.css`.
 
 ## Usage
 
@@ -62,11 +76,11 @@ own implementations by adding translations to your application.
 ```yml
 en:
   comparison:
-    classes:
+    dom_classes:
       positive: 'comparison positive'
       negative: 'comparison negative'
       nochange: 'comparison nochange'
-    css:
+    style:
       positive_html: 'color: #3c763d; background-color: #dff0d8;'
       negative_html: 'color: #a94442; background-color: #f2dede;'
       nochange_html: 'color: #777777;'

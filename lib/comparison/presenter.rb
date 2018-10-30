@@ -41,9 +41,6 @@ module Comparison
       end
     end
 
-    alias change percentage
-    deprecate :change
-
     # rubocop:disable Metrics/LineLength
     ##
     # Returns the I18n translation for `comparison.icons`. (See also #arrow.)
@@ -117,14 +114,14 @@ module Comparison
     end
 
     ##
-    # Returns the I18n translation for `comparison.classes`. (See also #css.)
+    # Returns the I18n translation for `comparison.dom_classes`.
     #
     # Use these translations to specify CSS classes for tags that contain
     # comparison data. For example:
     #
     #     en:
     #       comparison:
-    #         classes:
+    #         dom_classes:
     #           positive: 'comparison positive'
     #           negative: 'comparison negative'
     #           nochange: 'comparison nochange'
@@ -141,51 +138,70 @@ module Comparison
     #       color: #777777;
     #     }
     #
-    #     content_tag cmp.difference, class: cmp.classes
+    #     content_tag :span, cmp.difference, class: cmp.dom_classes
+    #     # => "<span class=\"comparison positive\">+10%</span>"
     #
-    # TODO: Rename this to css?
-    def classes
+    # If you need to work with inline styles instead of CSS classes, see the
+    # `#style` method.
+    def dom_classes
       if positive?
-        t 'comparison.classes.positive'
+        t 'comparison.dom_classes.positive',
+          default: %i[comparison.classes.positive]
       elsif negative?
-        t 'comparison.classes.negative'
+        t 'comparison.dom_classes.negative',
+          default: %i[comparison.classes.negative]
       else
-        t 'comparison.classes.nochange'
+        t 'comparison.dom_classes.nochange',
+          default: %i[comparison.classes.nochange]
       end
     end
 
+    def classes
+      Kernel.warn '[DEPRECATION WARNING] #classes is deprecated: ' \
+        "use #dom_classes instead: #{caller(3..3).first}"
+      dom_classes
+    end
+
+    # rubocop:disable Metrics/LineLength
     ##
-    # Returns the I18n translation for `comparison.css`. (See also #classes.)
+    # Returns the I18n translation for `comparison.style`.
     #
-    # Use these translations to specify raw CSS style rules to be used when
+    # Use these translations to specify inline CSS style rules to be used when
     # formatting comparison data. For example:
     #
     #     en:
     #       comparison:
-    #         css:
+    #         style:
     #           positive: 'color: #3c763d; background-color: #dff0d8;'
     #           negative: 'color: #a94442; background-color: #f2dede;'
     #           nochange: 'color: #777777;'
     #
-    #     content_tag cmp.difference, style: cmp.css
+    #     content_tag :span, cmp.difference, style: cmp.style
+    #     # => "<span style=\"color: #3c763d; background-color: #dff0d8;\">+10%</span>"
     #
-    # #css and its sister method #classes perform very similar tasks. Use #css
-    # when you need to embed the CSS style rules in an HTML tag using the style
-    # attribute. Use #classes when you want have the CSS style rules defined in
-    # a class and want to add that class to the HTML tag.
+    # In general, it's probably preferable to use `#dom_classes` in conjunction
+    # with CSS style rules defined separate CSS files, but this isn't always
+    # possible.
     #
-    # TODO: Rename this to style?
-    def css
+    # rubocop:enable Metrics/LineLength
+    def style
       if positive?
-        t 'comparison.css.positive', default: ''
+        t 'comparison.style.positive',
+          default: [:'comparison.css.positive', '']
       elsif negative?
-        t 'comparison.css.negative', default: ''
+        t 'comparison.style.negative',
+          default: [:'comparison.css.negative', '']
       else
-        t 'comparison.css.nochange', default: ''
+        t 'comparison.style.nochange',
+          default: [:'comparison.css.nochange', '']
       end
     end
 
-    alias style css
+    def css
+      Kernel.warn '[DEPRECATION WARNING] #css is deprecated: ' \
+        "use #style instead: #{caller(3..3).first}"
+      style
+    end
 
     private
 

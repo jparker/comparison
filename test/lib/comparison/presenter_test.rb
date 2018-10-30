@@ -125,52 +125,100 @@ module Comparison
       assert cmp.arrow.html_safe?, 'Comparator#arrow should be html-safe'
     end
 
-    def test_classes_negative
+    def test_dom_classes_negative
+      classes = 'comparison negative'
+      I18n.backend.store_translations :en,
+        comparison: { dom_classes: { negative: classes } }
+      assert_equal classes, negative.dom_classes
+    end
+
+    def test_dom_classes_negative_falls_back_on_classes
       classes = 'comparison negative'
       I18n.backend.store_translations :en,
         comparison: { classes: { negative: classes } }
-      cmp = negative
-      assert_equal classes, cmp.classes
+      assert_equal classes, negative.dom_classes
     end
 
-    def test_classes_positive
+    def test_dom_classes_positive
+      classes = 'comparison positive'
+      I18n.backend.store_translations :en,
+        comparison: { dom_classes: { positive: classes } }
+      assert_equal classes, positive.dom_classes
+    end
+
+    def test_dom_classes_positive_falls_back_on_classes
       classes = 'comparison positive'
       I18n.backend.store_translations :en,
         comparison: { classes: { positive: classes } }
-      cmp = positive
-      assert_equal classes, cmp.classes
+      assert_equal classes, positive.dom_classes
     end
 
-    def test_classes_no_change
+    def test_dom_classes_nochange
+      classes = 'comparison nochange'
+      I18n.backend.store_translations :en,
+        comparison: { dom_classes: { nochange: classes } }
+      assert_equal classes, nochange.dom_classes
+    end
+
+    def test_dom_classes_nochange_falls_back_on_classes
       classes = 'comparison nochange'
       I18n.backend.store_translations :en,
         comparison: { classes: { nochange: classes } }
-      cmp = nochange
-      assert_equal classes, cmp.classes
+      assert_equal classes, nochange.dom_classes
     end
 
-    def test_css_negative
-      css = 'color: #a94442; background-color: #f2dede;'
+    def test_style_negative
+      style = 'color: #fff; background-color: #0a0;'
       I18n.backend.store_translations :en,
-        comparison: { css: { negative: css } }
-      cmp = negative
-      assert_equal css, cmp.css
+        comparison: { style: { negative: style } }
+      assert_equal style, negative.style
     end
 
-    def test_css_positive
-      css = 'color: #3c763d; background-color: #dff0d8;'
+    def test_style_negative_falls_back_on_css
+      style = 'color: #fff; background-color: #0a0;'
       I18n.backend.store_translations :en,
-        comparison: { css: { positive: css } }
-      cmp = positive
-      assert_equal css, cmp.css
+        comparison: { css: { negative: style } }
+      assert_equal style, negative.style
     end
 
-    def test_css_no_change
-      css = 'color: #777777;'
+    def test_style_negative_defaults_to_empty_string
+      assert_equal '', negative.style
+    end
+
+    def test_style_positive
+      style = 'color: #fff; background-color: #a00;'
       I18n.backend.store_translations :en,
-        comparison: { css: { nochange: css } }
-      cmp = nochange
-      assert_equal css, cmp.css
+        comparison: { style: { positive: style } }
+      assert_equal style, positive.style
+    end
+
+    def test_style_positive_falls_back_on_css
+      style = 'color: #fff; background-color: #a00;'
+      I18n.backend.store_translations :en,
+        comparison: { css: { positive: style } }
+      assert_equal style, positive.style
+    end
+
+    def test_style_positive_defaults_to_empty_string
+      assert_equal '', positive.style
+    end
+
+    def test_style_no_change
+      style = 'color: #777;'
+      I18n.backend.store_translations :en,
+        comparison: { style: { nochange: style } }
+      assert_equal style, nochange.style
+    end
+
+    def test_style_no_change_falls_back_on_css
+      style = 'color: #777;'
+      I18n.backend.store_translations :en,
+        comparison: { css: { nochange: style } }
+      assert_equal style, nochange.style
+    end
+
+    def test_style_no_change_defaults_to_empty_string
+      assert_equal '', nochange.style
     end
 
     def positive
