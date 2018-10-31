@@ -81,9 +81,9 @@ en:
       negative: 'comparison negative'
       nochange: 'comparison nochange'
     style:
-      positive_html: 'color: #3c763d; background-color: #dff0d8;'
-      negative_html: 'color: #a94442; background-color: #f2dede;'
-      nochange_html: 'color: #777777;'
+      positive: 'color: #3c763d; background-color: #dff0d8;'
+      negative: 'color: #a94442; background-color: #f2dede;'
+      nochange: 'color: #777777;'
     icons:
       positive_html: '<span class="glyphicon glyphicon-arrow-up"></span>'
       negative_html: '<span class="glyphicon glyphicon-arrow-down"></span>'
