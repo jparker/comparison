@@ -205,11 +205,9 @@ module Comparison
 
     private
 
-    def number_to_percentage(value, delimiter: ',', precision: 0, **options)
-      ActiveSupport::NumberHelper.number_to_percentage value,
-        delimiter: delimiter,
-        precision: precision,
-        **options
+    def number_to_percentage(value, **options)
+      options = { delimiter: ',', precision: 0, **options }
+      ActiveSupport::NumberHelper.number_to_percentage value, options
     end
 
     def number_to_currency(*args)
