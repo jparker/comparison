@@ -197,6 +197,19 @@ module Comparison
       end
     end
 
+    ##
+    # Returns a string description of the direction of change. Possible
+    # descriptions are "positive", "negative", and "nochange".
+    def description
+      if positive?
+        'positive'
+      elsif negative?
+        'negative'
+      else
+        'nochange'
+      end
+    end
+
     def css
       Kernel.warn '[DEPRECATION WARNING] #css is deprecated: ' \
         "use #style instead: #{caller(3..3).first}"

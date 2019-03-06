@@ -221,6 +221,18 @@ module Comparison
       assert_equal '', nochange.style
     end
 
+    def test_positive_description
+      assert_equal 'positive', positive.description
+    end
+
+    def test_negative_description
+      assert_equal 'negative', negative.description
+    end
+
+    def test_nochange_description
+      assert_equal 'nochange', nochange.description
+    end
+
     def positive
       presenter 100, 75
     end
