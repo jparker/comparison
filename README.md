@@ -107,9 +107,14 @@ And then execute:
 $ bundle
 ```
 
-Or install it yourself as:
-```bash
-$ gem install comparison
+Include the Comparison helpers by adding the following to your
+application\_helper.rb:
+
+```ruby
+# app/helpers/application_helper.rb
+module ApplicationHelper
+  include Comparison::ApplicationHelper
+end
 ```
 
 ## Contributing
