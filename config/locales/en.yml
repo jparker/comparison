@@ -1,6 +1,6 @@
 en:
   comparison:
-    # classes:
+    # dom_classes:
     #   positive: 'comparison positive'
     #   negative: 'comparison negative'
     #   nochange: 'comparison nochange'
