@@ -78,6 +78,16 @@ module Comparison
       assert_equal '33%', cmp.percentage(format: '%n%')
     end
 
+    test 'unsigned negative percentage' do
+      cmp = presenter 50, 75
+      assert_equal '33%', cmp.unsigned_percentage
+    end
+
+    test 'unsigned positive percentage' do
+      cmp = presenter 75, 50
+      assert_equal '50%', cmp.unsigned_percentage
+    end
+
     test 'icon with negative difference' do
       icon = '<span class="glyphicon glyphicon-arrow-down"></span>'
       I18n.backend.store_translations :en,

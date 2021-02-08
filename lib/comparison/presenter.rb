@@ -41,6 +41,21 @@ module Comparison
     end
 
     ##
+    # Returns the absolute value of Comparator#relative formatted as a percentage.
+    #
+    # Use this if you are relying on other cues (colors and/or icons) to
+    # indicate positive or negative values.
+    def unsigned_percentage(**options)
+      if nan? || zero?
+        number_to_percentage 0, **options
+      elsif infinite?
+        t 'comparison.infinity_html', default: nil
+      else
+        number_to_percentage relative.abs, **options
+      end
+    end
+
+    ##
     # Returns the I18n translation for `comparison.icons`. (See also #arrow.)
     #
     # This method is intended to display a graphical representation of the

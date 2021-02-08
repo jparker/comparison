@@ -42,6 +42,10 @@ literally `m - n`.
 the hood it uses `ActionView::Helpers::NumberHelper#number_to_percentage` to
 format the percentage. Options are passed through to that method.
 
+`#unsigned_percentage` returns the absolute value of the percentage. Use this
+if you prefer to use other cues, such as colors or icons, to indicate positive
+or negative changes.
+
 `#arrow` returns an HTML character entity for an arrow (up, down, or, for no
 change, an empty string).
 
