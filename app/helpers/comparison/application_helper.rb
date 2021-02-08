@@ -7,12 +7,12 @@ module Comparison
     #
     # If a block is given, the Presenter is yielded to the block.
     #
-    # rubocop:disable Naming/UncommunicativeMethodParamName
+    # rubocop:disable Naming/MethodParameterName
     def compare(m, n)
       comparison = Presenter.new Comparator.new m, n
       yield comparison if block_given?
       comparison
     end
-    # rubocop:enable Naming/UncommunicativeMethodParamName
+    # rubocop:enable Naming/MethodParameterName
   end
 end

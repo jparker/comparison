@@ -40,7 +40,6 @@ module Comparison
       end
     end
 
-    # rubocop:disable Metrics/LineLength
     ##
     # Returns the I18n translation for `comparison.icons`. (See also #arrow.)
     #
@@ -61,7 +60,6 @@ module Comparison
     #           negative_html: '<span class="glyphicon glyphicon-arrow-down"></span>'
     #           nochange_html: '<span class="glyphicon glyphicon-minus"></span>'
     #
-    # rubocop:enable Metrics/LineLength
     def icon
       if positive?
         t 'comparison.icons.positive_html'
@@ -161,7 +159,6 @@ module Comparison
       dom_classes
     end
 
-    # rubocop:disable Metrics/LineLength
     ##
     # Returns the I18n translation for `comparison.style`.
     #
@@ -182,7 +179,6 @@ module Comparison
     # with CSS style rules defined separate CSS files, but this isn't always
     # possible.
     #
-    # rubocop:enable Metrics/LineLength
     def style
       if positive?
         t 'comparison.style.positive',

@@ -15,12 +15,12 @@ module Comparison
     #
     # Both numbers will be converted to instances of `BigDecimal`.
     #
-    # rubocop:disable Naming/UncommunicativeMethodParamName
+    # rubocop:disable Naming/MethodParameterName
     def initialize(m, n)
       @m = m.to_d
       @n = n.to_d
     end
-    # rubocop:enable Naming/UncommunicativeMethodParamName
+    # rubocop:enable Naming/MethodParameterName
 
     attr_reader :m, :n
 

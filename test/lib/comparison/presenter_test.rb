@@ -81,7 +81,7 @@ module Comparison
     def test_icon_negative
       icon = '<span class="glyphicon glyphicon-arrow-down"></span>'
       I18n.backend.store_translations :en,
-        comparison: { icons: { negative_html:  icon } }
+        comparison: { icons: { negative_html: icon } }
       cmp = negative
       assert_equal icon, cmp.icon
       assert cmp.icon.html_safe?, 'Comparator#icon should be html-safe'
@@ -90,7 +90,7 @@ module Comparison
     def test_icon_positive
       icon = '<span class="glyphicon glyphicon-arrow-up"></span>'
       I18n.backend.store_translations :en,
-        comparison: { icons: { positive_html:  icon } }
+        comparison: { icons: { positive_html: icon } }
       cmp = positive
       assert_equal icon, cmp.icon
       assert cmp.icon.html_safe?, 'Comparator#icon should be html-safe'
@@ -99,7 +99,7 @@ module Comparison
     def test_icon_no_change
       icon = '<span class="glyphicon glyphicon-minus"></span>'
       I18n.backend.store_translations :en,
-        comparison: { icons: { nochange_html:  icon } }
+        comparison: { icons: { nochange_html: icon } }
       cmp = nochange
       assert_equal icon, cmp.icon
       assert cmp.icon.html_safe?, 'Comparator#icon should be html-safe'
@@ -252,11 +252,11 @@ module Comparison
       presenter 75, 75
     end
 
-    # rubocop:disable Naming/UncommunicativeMethodParamName
+    # rubocop:disable Naming/MethodParameterName
     def presenter(m, n)
       Presenter.new Comparator.new m, n
     end
-    # rubocop:enable Naming/UncommunicativeMethodParamName
+    # rubocop:enable Naming/MethodParameterName
   end
   # rubocop:enable Metrics/ClassLength
 end

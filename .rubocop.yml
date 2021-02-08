@@ -1,7 +1,10 @@
 AllCops:
   Exclude:
-    - 'test/dummy/**/*'
-    - 'bin/rails'
+    - test/dummy/**/*
+    - test/test_helper.rb
+    - bin/rails
+    - comparison.gemspec
+  NewCops: enable
   TargetRubyVersion: 2.5.0
-Layout/ParameterAlignment:
+Layout/ArgumentAlignment:
   Enabled: false
