@@ -4,7 +4,7 @@ require 'test_helper'
 
 module Comparison
   class ApplicationHelperTest < ActionView::TestCase
-    def test_yields_a_comparison_presenter
+    test 'compare yields a comparison presenter' do
       compare 100, 75 do |cmp|
         assert_equal '+33%', cmp.percentage
         return
@@ -12,7 +12,7 @@ module Comparison
       flunk 'block was not executed'
     end
 
-    def test_returns_a_comparison_presenter
+    test 'compare returns a comparison presenter' do
       cmp = compare 100, 75
       assert_equal '+33%', cmp.percentage
     end

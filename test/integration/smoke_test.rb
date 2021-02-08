@@ -7,9 +7,7 @@ class SmokeTest < ActionDispatch::IntegrationTest
   # it is not handling the nested assert_selects intelligently. I don't see a
   # better way to write this test without being unnecessarily redudant.
 
-  # rubocop:disable Metrics/AbcSize
-  # rubocop:disable Metrics/MethodLength
-  def test_comparison
+  test 'comparison smoke test' do
     get root_path
 
     assert_select 'tr:nth-child(1)' do
@@ -37,6 +35,4 @@ class SmokeTest < ActionDispatch::IntegrationTest
       assert_select 'td:nth-child(3)', '↑'
     end
   end
-  # rubocop:enable Metrics/MethodLength
-  # rubocop:enable Metrics/AbcSize
 end
