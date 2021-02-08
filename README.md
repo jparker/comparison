@@ -92,6 +92,7 @@ en:
       positive_html: '&uarr;'
       negative_html: '&darr;'
       nochange_html: ''
+    infinity_html: '&infin;'
 ```
 
 ## Installation

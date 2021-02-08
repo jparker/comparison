@@ -56,6 +56,13 @@ module Comparison
       assert_nil cmp.percentage
     end
 
+    def test_percentage_infinity_with_i18n_translation
+      I18n.backend.store_translations :en,
+        comparison: { infinity_html: '&infin;' }
+      cmp = presenter 1, 0
+      assert_equal '&infin;', cmp.percentage
+    end
+
     def test_percentage_delimiter_option
       cmp = presenter 11, 1
       assert_equal '+1000%', cmp.percentage(delimiter: nil)

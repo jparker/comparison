@@ -32,8 +32,7 @@ module Comparison
       if nan? || zero?
         number_to_percentage 0, **options
       elsif infinite?
-        # TODO: Return nil, or lookup an optional representation in I18n?
-        nil
+        t 'comparison.infinity_html', default: nil
       elsif positive?
         number_to_percentage relative, format: '+%n%', **options
       else
