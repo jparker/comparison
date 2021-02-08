@@ -24,7 +24,8 @@ module Comparison
 
     attr_reader :m, :n
 
-    delegate %i[infinite? nan? negative? positive? zero?] => :relative
+    delegate %i[negative? positive? zero? nonzero?] => :absolute
+    delegate %i[infinite? nan?] => :relative
 
     ##
     # Returns the difference between +@m+ and +@n+.
@@ -37,11 +38,7 @@ module Comparison
     ##
     # Returns the percentage difference of +@m+ to +@n+.
     def relative
-      @relative ||= if n.negative?
-                      (1 - m / n) * 100
-                    else
-                      (m / n - 1) * 100
-                    end
+      @relative ||= difference / n.abs * 100
     end
 
     alias percentage relative
