@@ -170,7 +170,7 @@ module Comparison
 
     def classes
       Kernel.warn '[DEPRECATION WARNING] #classes is deprecated: ' \
-        "use #dom_classes instead: #{caller(3..3).first}"
+                  "use #dom_classes instead: #{caller(3..3).first}"
       dom_classes
     end
 
@@ -222,7 +222,7 @@ module Comparison
 
     def css
       Kernel.warn '[DEPRECATION WARNING] #css is deprecated: ' \
-        "use #style instead: #{caller(3..3).first}"
+                  "use #style instead: #{caller(3..3).first}"
       style
     end
 

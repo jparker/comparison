@@ -1,17 +1,26 @@
 before_script:
-  - bundle install -j "$(nproc)"
+  - bundle install --jobs="$(nproc)" --retry=3
 
-test:ruby-2.5:
-  image: "ruby:2.5"
+build:rubocop:
+  stage: build
+  image: "ruby:3.1"
   script:
-    - bundle exec rake test
-
-test:ruby-2.6:
-  image: "ruby:2.6"
-  script:
-    - bundle exec rake test
+    - bundle exec rubocop
 
 test:ruby-2.7:
+  stage: test
   image: "ruby:2.7"
+  script:
+    - bundle exec rake test
+
+test:ruby-3.0:
+  stage: test
+  image: "ruby:3.0"
+  script:
+    - bundle exec rake test
+
+test:ruby-3.1:
+  stage: test
+  image: "ruby:3.1"
   script:
     - bundle exec rake test
