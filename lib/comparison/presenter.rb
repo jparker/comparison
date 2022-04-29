@@ -11,8 +11,6 @@ module Comparison
 
     ARROWS = { up: '&uarr;', down: '&darr;', none: '' }.freeze
 
-    # TODO: This shouldn't necessarily return a currency representation.
-
     ##
     # Returns Comparator#absolute presented as currency.
     def difference(**options)
