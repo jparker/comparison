@@ -1,4 +1,4 @@
-# [![Gem Version](https://badge.fury.io/rb/comparison.svg)](https://badge.fury.io/rb/comparison) [![Build Status](https://travis-ci.org/jparker/comparison.svg?branch=master)](https://travis-ci.org/jparker/comparison)
+# [![Gem Version](https://badge.fury.io/rb/comparison.svg)](https://badge.fury.io/rb/comparison)
 
 # Comparison
 
@@ -27,16 +27,16 @@ instead of `comparison.css`.
 
 ## Usage
 
-The library has three components: the Comparison class for performing the
-actual math, the Presenter class for decorating the Comparison with
-view-friendly output, and a helper module for using the Presenter with the
+The library has three components: the `Comparator` class for performing the
+actual math, the `Presenter` class for decorating the comparator with
+view-friendly output, and a helper module for using the presenter with the
 view.
 
-`#compare` helper takes the two numbers to be compared and yields the
-Comparison presenter to a block.
+The `#compare` helper takes the two numbers to be compared and yields the
+presenter to a block.
 
 `#difference` provides the absolute difference between the two numbers,
-literally `m - n`.
+literally `value - other`.
 
 `#percentage` provides the percentage difference between the two numbers. Under
 the hood it uses `ActionView::Helpers::NumberHelper#number_to_percentage` to
@@ -50,9 +50,9 @@ or negative changes.
 change, an empty string).
 
 ```erb
-<%= compare m, n do |cmp| %>
-  <td><%= number_to_currency m %></td>
-  <td><%= number_to_currency n %></td>
+<%= compare value, other do |cmp| %>
+  <td><%= number_to_currency value %></td>
+  <td><%= number_to_currency other %></td>
   <td><%= cmp.difference %></td>
   <td>
     <%= cmp.arrow %>
