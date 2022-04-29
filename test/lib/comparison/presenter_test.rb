@@ -57,8 +57,7 @@ module Comparison
     end
 
     test 'infinite percentage with i18n translation' do
-      I18n.backend.store_translations :en,
-        comparison: { infinity_html: '&infin;' }
+      I18n.backend.store_translations :en, comparison: { infinity_html: '&infin;' }
       cmp = presenter 1, 0
       assert_equal '&infin;', cmp.percentage
     end
@@ -90,8 +89,7 @@ module Comparison
 
     test 'icon with negative difference' do
       icon = '<span class="glyphicon glyphicon-arrow-down"></span>'
-      I18n.backend.store_translations :en,
-        comparison: { icons: { negative_html: icon } }
+      I18n.backend.store_translations :en, comparison: { icons: { negative_html: icon } }
       cmp = negative
       assert_equal icon, cmp.icon
       assert cmp.icon.html_safe?, 'Comparator#icon should be html-safe'
@@ -99,8 +97,7 @@ module Comparison
 
     test 'icon with positive difference' do
       icon = '<span class="glyphicon glyphicon-arrow-up"></span>'
-      I18n.backend.store_translations :en,
-        comparison: { icons: { positive_html: icon } }
+      I18n.backend.store_translations :en, comparison: { icons: { positive_html: icon } }
       cmp = positive
       assert_equal icon, cmp.icon
       assert cmp.icon.html_safe?, 'Comparator#icon should be html-safe'
@@ -108,8 +105,7 @@ module Comparison
 
     test 'icon with zero difference' do
       icon = '<span class="glyphicon glyphicon-minus"></span>'
-      I18n.backend.store_translations :en,
-        comparison: { icons: { nochange_html: icon } }
+      I18n.backend.store_translations :en, comparison: { icons: { nochange_html: icon } }
       cmp = nochange
       assert_equal icon, cmp.icon
       assert cmp.icon.html_safe?, 'Comparator#icon should be html-safe'
@@ -117,8 +113,7 @@ module Comparison
 
     test 'arrow with negative difference' do
       arrow = '&darr;'
-      I18n.backend.store_translations :en,
-        comparison: { arrows: { negative_html: arrow } }
+      I18n.backend.store_translations :en, comparison: { arrows: { negative_html: arrow } }
       cmp = negative
       assert_equal arrow, cmp.arrow
       assert cmp.arrow.html_safe?, 'Comparator#arrow should be html-safe'
@@ -126,8 +121,7 @@ module Comparison
 
     test 'arrow with positive difference' do
       arrow = '&uarr;'
-      I18n.backend.store_translations :en,
-        comparison: { arrows: { positive_html: arrow } }
+      I18n.backend.store_translations :en, comparison: { arrows: { positive_html: arrow } }
       cmp = positive
       assert_equal arrow, cmp.arrow
       assert cmp.arrow.html_safe?, 'Comparator#arrow should be html-safe'
@@ -135,8 +129,7 @@ module Comparison
 
     test 'arrow with zero difference' do
       arrow = ''
-      I18n.backend.store_translations :en,
-        comparison: { arrows: { nochange_html: arrow } }
+      I18n.backend.store_translations :en, comparison: { arrows: { nochange_html: arrow } }
       cmp = nochange
       assert_equal arrow, cmp.arrow
       assert cmp.arrow.html_safe?, 'Comparator#arrow should be html-safe'
@@ -144,98 +137,104 @@ module Comparison
 
     test 'dom_classes with negative difference' do
       classes = 'comparison negative'
-      I18n.backend.store_translations :en,
-        comparison: { dom_classes: { negative: classes } }
-      assert_equal classes, negative.dom_classes
-    end
-
-    test 'dom_classes with negative difference falls back on legacy i18n key' do
-      classes = 'comparison negative'
-      I18n.backend.store_translations :en,
-        comparison: { classes: { negative: classes } }
+      I18n.backend.store_translations :en, comparison: { dom_classes: { negative: classes } }
       assert_equal classes, negative.dom_classes
     end
 
     test 'dom_classes with positive difference' do
       classes = 'comparison positive'
-      I18n.backend.store_translations :en,
-        comparison: { dom_classes: { positive: classes } }
-      assert_equal classes, positive.dom_classes
-    end
-
-    test 'dom_classes with positive difference falls back on legacy i18n key' do
-      classes = 'comparison positive'
-      I18n.backend.store_translations :en,
-        comparison: { classes: { positive: classes } }
+      I18n.backend.store_translations :en, comparison: { dom_classes: { positive: classes } }
       assert_equal classes, positive.dom_classes
     end
 
     test 'dom_classes with zero difference' do
       classes = 'comparison nochange'
-      I18n.backend.store_translations :en,
-        comparison: { dom_classes: { nochange: classes } }
+      I18n.backend.store_translations :en, comparison: { dom_classes: { nochange: classes } }
       assert_equal classes, nochange.dom_classes
     end
 
-    test 'dom_classes with zero difference falls back on legacy i18n key' do
+    test 'dom_classes with negative difference falls back on "classes" i18n key' do
+      classes = 'comparison negative'
+      I18n.backend.store_translations :en, comparison: { classes: { negative: classes } }
+      assert_equal classes, negative.dom_classes
+    end
+
+    test 'dom_classes with positive difference falls back on "classes" i18n key' do
+      classes = 'comparison positive'
+      I18n.backend.store_translations :en, comparison: { classes: { positive: classes } }
+      assert_equal classes, positive.dom_classes
+    end
+
+    test 'dom_classes with zero difference falls back on "classes" i18n key' do
       classes = 'comparison nochange'
-      I18n.backend.store_translations :en,
-        comparison: { classes: { nochange: classes } }
+      I18n.backend.store_translations :en, comparison: { classes: { nochange: classes } }
       assert_equal classes, nochange.dom_classes
     end
 
-    test 'style with negative difference' do
+    test 'inline_style with negative difference' do
       style = 'color: #fff; background-color: #0a0;'
-      I18n.backend.store_translations :en,
-        comparison: { style: { negative: style } }
-      assert_equal style, negative.style
+      I18n.backend.store_translations :en, comparison: { inline_style: { negative: style } }
+      assert_equal style, negative.inline_style
     end
 
-    test 'style with negative difference falls back on legacy i18n key' do
+    test 'inline_style with negative difference defaults to empty string' do
+      assert_equal '', negative.inline_style
+    end
+
+    test 'inline_style with positive difference' do
+      style = 'color: #fff; background-color: #a00;'
+      I18n.backend.store_translations :en, comparison: { inline_style: { positive: style } }
+      assert_equal style, positive.inline_style
+    end
+
+    test 'inline_style with positive difference defaults to empty string' do
+      assert_equal '', positive.inline_style
+    end
+
+    test 'inline_style with zero difference' do
+      style = 'color: #777;'
+      I18n.backend.store_translations :en, comparison: { inline_style: { nochange: style } }
+      assert_equal style, nochange.inline_style
+    end
+
+    test 'inline_style with negative difference falls back on "style" i18n key' do
       style = 'color: #fff; background-color: #0a0;'
-      I18n.backend.store_translations :en,
-        comparison: { css: { negative: style } }
-      assert_equal style, negative.style
+      I18n.backend.store_translations :en, comparison: { style: { negative: style } }
+      assert_equal style, negative.inline_style
     end
 
-    test 'style with negative difference defaults to empty string' do
-      assert_equal '', negative.style
-    end
-
-    test 'style with positive difference' do
+    test 'inline_style with positive difference falls back on "style" i18n key' do
       style = 'color: #fff; background-color: #a00;'
-      I18n.backend.store_translations :en,
-        comparison: { style: { positive: style } }
-      assert_equal style, positive.style
+      I18n.backend.store_translations :en, comparison: { style: { positive: style } }
+      assert_equal style, positive.inline_style
     end
 
-    test 'style with positive difference falls back on legacy i18n key' do
+    test 'inline_style with zero difference falls back on "style" i18n key' do
+      style = 'color: #777;'
+      I18n.backend.store_translations :en, comparison: { style: { nochange: style } }
+      assert_equal style, nochange.inline_style
+    end
+
+    test 'inline_style with negative difference falls back on "css" i18n key' do
+      style = 'color: #fff; background-color: #0a0;'
+      I18n.backend.store_translations :en, comparison: { css: { negative: style } }
+      assert_equal style, negative.inline_style
+    end
+
+    test 'inline_style with positive difference falls back on "css" i18n key' do
       style = 'color: #fff; background-color: #a00;'
-      I18n.backend.store_translations :en,
-        comparison: { css: { positive: style } }
-      assert_equal style, positive.style
+      I18n.backend.store_translations :en, comparison: { css: { positive: style } }
+      assert_equal style, positive.inline_style
     end
 
-    test 'style with positive difference defaults to empty string' do
-      assert_equal '', positive.style
-    end
-
-    test 'style with zero difference' do
+    test 'inline_style with zero difference falls back on "css" i18n key' do
       style = 'color: #777;'
-      I18n.backend.store_translations :en,
-        comparison: { style: { nochange: style } }
-      assert_equal style, nochange.style
+      I18n.backend.store_translations :en, comparison: { css: { nochange: style } }
+      assert_equal style, nochange.inline_style
     end
 
-    test 'style with zero difference falls back on legacy i18n key' do
-      style = 'color: #777;'
-      I18n.backend.store_translations :en,
-        comparison: { css: { nochange: style } }
-      assert_equal style, nochange.style
-    end
-
-    test 'style with zero difference defaults to empty string' do
-      assert_equal '', nochange.style
+    test 'inline_style with zero difference defaults to empty string' do
+      assert_equal '', nochange.inline_style
     end
 
     test 'description with negative difference' do
@@ -262,11 +261,9 @@ module Comparison
       presenter 75, 75
     end
 
-    # rubocop:disable Naming/MethodParameterName
-    def presenter(m, n)
-      Presenter.new Comparator.new m, n
+    def presenter(value, other)
+      Presenter.new Comparator.new value, other
     end
-    # rubocop:enable Naming/MethodParameterName
   end
   # rubocop:enable Metrics/ClassLength
 end

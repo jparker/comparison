@@ -10,10 +10,10 @@ en:
     #   negative_html: '<span class="glyphicon glyphicon-arrow-down"></span>'
     #   nochange_html: '<span class="glyphicon glyphicon-minus"></span>'
 
-    style:
-      positive_html: ''
-      negative_html: ''
-      nochange_html: ''
+    inline_style:
+      positive: ''
+      negative: ''
+      nochange: ''
 
     arrows:
       positive_html: '&uarr;'

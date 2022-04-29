@@ -10,21 +10,6 @@ color-coded to indicate positive or negative growth. This plugin provides
 helpers that abstract the logic of deciding what to show into a handful of
 simple methods and leveraging I18n.
 
-## Upgrade Notes
-
-This gem has been getting a facelift, and this has resulted in some changes
-from the old behavior.
-
-`Comparison::Presenter#classes` has been renamed to
-`Comparison::Presenter#dom_classes`, and `Comparison::Presenter#css` has been
-renamed to `Comparison::Presenter#style`. The old method names continue to
-work, but they will emit deprecation warnings.
-
-The I18n keys used by the above methods have been similarly renamed, but the
-methods will continue to fall back on the old keys. Going forward, use
-`comparison.dom_classes` instead of `comparison.classes` and `comparison.style`
-instead of `comparison.css`.
-
 ## Usage
 
 The library has three components: the `Comparator` class for performing the
@@ -84,7 +69,7 @@ en:
       positive: 'comparison positive'
       negative: 'comparison negative'
       nochange: 'comparison nochange'
-    style:
+    inline_style:
       positive: 'color: #3c763d; background-color: #dff0d8;'
       negative: 'color: #a94442; background-color: #f2dede;'
       nochange: 'color: #777777;'
@@ -98,6 +83,21 @@ en:
       nochange_html: ''
     infinity_html: '&infin;'
 ```
+
+If the `dom_classes` keys are not present, translation falls back on `classes`.
+If the `inline_style` keys are not present, translation falls back on `style`
+and `css`. In both cases, those fallback keys are deprecated. Expect support
+for those keys to eventually be dropped.
+
+## Upgrade Notes
+
+This gem has been getting a facelift, and this has resulted in some changes
+from the old behavior.
+
+`Comparison::Presenter#classes` has been renamed to
+`Comparison::Presenter#dom_classes`, and `Comparison::Presenter#css` has been
+renamed to `Comparison::Presenter#inline_style`. The old method names continue
+to work, but they will emit deprecation warnings.
 
 ## Installation
 
