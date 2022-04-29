@@ -9,7 +9,7 @@ module Comparison
   class Presenter < DelegateClass(Comparator)
     include ActionView::Helpers::TranslationHelper
 
-    ARROWS = { up: '&uarr;', down: '&darr;', none: '' }.freeze
+    ARROWS = { positive: '&uarr;', negative: '&darr;', nochange: '' }.freeze
 
     ##
     # Returns Comparator#absolute presented as currency.
@@ -74,13 +74,8 @@ module Comparison
     #           nochange_html: '<span class="glyphicon glyphicon-minus"></span>'
     #
     def icon
-      if positive?
-        t 'comparison.icons.positive_html'
-      elsif negative?
-        t 'comparison.icons.negative_html'
-      else
-        t 'comparison.icons.nochange_html'
-      end
+      key, = expand_i18n_keys 'icons', suffix: '_html'
+      t key
     end
 
     ##
@@ -114,13 +109,8 @@ module Comparison
     # #icons is meant to be used from full-featured view contexts. As such,
     # #icons is the one to use to generate HTML tags.
     def arrow
-      if positive?
-        t 'comparison.arrows.positive_html', default: ARROWS[:up]
-      elsif negative?
-        t 'comparison.arrows.negative_html', default: ARROWS[:down]
-      else
-        t 'comparison.arrows.nochange_html', default: ARROWS[:none]
-      end
+      key, = expand_i18n_keys 'arrows', suffix: '_html'
+      t key, default: ARROWS[description.to_sym]
     end
 
     ##
@@ -152,23 +142,14 @@ module Comparison
     #     # => "<span class=\"comparison positive\">+10%</span>"
     #
     # If you need to work with inline styles instead of CSS classes, see the
-    # `#style` method.
+    # `#inline_style` method.
     def dom_classes
-      if positive?
-        t 'comparison.dom_classes.positive',
-          default: %i[comparison.classes.positive]
-      elsif negative?
-        t 'comparison.dom_classes.negative',
-          default: %i[comparison.classes.negative]
-      else
-        t 'comparison.dom_classes.nochange',
-          default: %i[comparison.classes.nochange]
-      end
+      key, *deprecated_keys = expand_i18n_keys(%w[dom_classes classes])
+      t key, default: deprecated_keys
     end
 
     def classes
-      Kernel.warn '[DEPRECATION WARNING] #classes is deprecated: ' \
-                  "use #dom_classes instead: #{caller(3..3).first}"
+      Kernel.warn "DEPRECATION WARNING: use #dom_classes instead of #classes (called from #{caller(3..3).first})"
       dom_classes
     end
 
@@ -180,29 +161,28 @@ module Comparison
     #
     #     en:
     #       comparison:
-    #         style:
+    #         inline_style:
     #           positive: 'color: #3c763d; background-color: #dff0d8;'
     #           negative: 'color: #a94442; background-color: #f2dede;'
     #           nochange: 'color: #777777;'
     #
-    #     content_tag :span, cmp.difference, style: cmp.style
+    #     content_tag :span, cmp.difference, style: cmp.inline_style
     #     # => "<span style=\"color: #3c763d; background-color: #dff0d8;\">+10%</span>"
     #
     # In general, it's probably preferable to use `#dom_classes` in conjunction
     # with CSS style rules defined separate CSS files, but this isn't always
     # possible.
     #
-    def style
-      if positive?
-        t 'comparison.style.positive',
-          default: [:'comparison.css.positive', '']
-      elsif negative?
-        t 'comparison.style.negative',
-          default: [:'comparison.css.negative', '']
-      else
-        t 'comparison.style.nochange',
-          default: [:'comparison.css.nochange', '']
-      end
+    def inline_style
+      key, *deprecated_keys = expand_i18n_keys(%w[inline_style style css])
+      t key, default: [*deprecated_keys, '']
+    end
+
+    alias style inline_style
+
+    def css
+      Kernel.warn "DEPRECATION WARNING: use #inline_style instead of #css (called from #{caller(3..3).first})"
+      inline_style
     end
 
     ##
@@ -218,12 +198,6 @@ module Comparison
       end
     end
 
-    def css
-      Kernel.warn '[DEPRECATION WARNING] #css is deprecated: ' \
-                  "use #style instead: #{caller(3..3).first}"
-      style
-    end
-
     private
 
     def number_to_percentage(value, **options)
@@ -233,6 +207,10 @@ module Comparison
 
     def number_to_currency(*args)
       ActiveSupport::NumberHelper.number_to_currency(*args)
+    end
+
+    def expand_i18n_keys(names, suffix: nil)
+      Array(names).map { |name| :"comparison.#{name}.#{description}#{suffix}" }
     end
   end
 end
