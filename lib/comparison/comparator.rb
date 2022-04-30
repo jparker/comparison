@@ -21,24 +21,36 @@ module Comparison
       @other = other.to_d
     end
 
-    delegate %i[negative? positive? zero? nonzero?] => :absolute
-    delegate %i[infinite? nan?] => :relative
+    delegate %i[negative? positive? zero? nonzero?] => :difference
+    delegate %i[infinite? nan?] => :change
 
     ##
     # Returns the difference between +@value+ and +@other+.
-    def absolute
-      @absolute ||= value - other
+    def difference
+      value - other
     end
 
-    alias difference absolute
+    def absolute
+      Kernel.warn "DEPRECATION WARNING: use #difference instead of #absolute (called from #{caller(1..1).first})"
+      difference
+    end
 
     ##
-    # Returns the percentage difference of +@value+ to +@other+.
-    def relative
-      @relative ||= difference / other.abs * 100
+    # Returns the relative change of +@value+ from +@other+.
+    def change
+      difference / other.abs
     end
 
-    alias percentage relative
+    ##
+    # Returns the relative change of +@value+ from +@other+ as a percentage.
+    def percentage
+      change * 100
+    end
+
+    def relative
+      Kernel.warn "DEPRECATION WARNING: use #percentage instead of #relative (called from #{caller(1..1).first})"
+      change
+    end
 
     def m
       Kernel.warn "DEPRECATION WARNING: use #value instead of #m (called from #{caller(1..1).first})"
