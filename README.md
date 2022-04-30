@@ -20,12 +20,13 @@ view.
 The `#compare` helper takes the two numbers to be compared and yields the
 presenter to a block.
 
-`#difference` provides the absolute difference between the two numbers,
-literally `value - other`.
+`#difference_as_currency` provides the difference between the two numbers,
+literally `value - other`, formatted as currency. Formatting is handled by
+`ActiveSupport::NumberHelper#number_to_currency`.
 
 `#percentage` provides the percentage difference between the two numbers. Under
-the hood it uses `ActionView::Helpers::NumberHelper#number_to_percentage` to
-format the percentage. Options are passed through to that method.
+the hood it uses `ActiveSupport#NumberHelper#number_to_percentage` to format
+the percentage. Options are passed through to that method.
 
 `#unsigned_percentage` returns the absolute value of the percentage. Use this
 if you prefer to use other cues, such as colors or icons, to indicate positive
@@ -38,7 +39,7 @@ change, an empty string).
 <%= compare value, other do |cmp| %>
   <td><%= number_to_currency value %></td>
   <td><%= number_to_currency other %></td>
-  <td><%= cmp.difference %></td>
+  <td><%= cmp.difference_as_currency %></td>
   <td>
     <%= cmp.arrow %>
     <%= cmp.percentage precision: 1 %>
@@ -88,16 +89,6 @@ If the `dom_classes` keys are not present, translation falls back on `classes`.
 If the `inline_style` keys are not present, translation falls back on `style`
 and `css`. In both cases, those fallback keys are deprecated. Expect support
 for those keys to eventually be dropped.
-
-## Upgrade Notes
-
-This gem has been getting a facelift, and this has resulted in some changes
-from the old behavior.
-
-`Comparison::Presenter#classes` has been renamed to
-`Comparison::Presenter#dom_classes`, and `Comparison::Presenter#css` has been
-renamed to `Comparison::Presenter#inline_style`. The old method names continue
-to work, but they will emit deprecation warnings.
 
 ## Installation
 

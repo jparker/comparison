@@ -25,6 +25,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'rails', '>= 4.0', '< 7.0'
 
   s.add_development_dependency 'minitest-focus'
+  s.add_development_dependency 'mocha'
   s.add_development_dependency 'pry'
   s.add_development_dependency 'rubocop'
 end
