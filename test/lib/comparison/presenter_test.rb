@@ -16,19 +16,25 @@ module Comparison
       I18n.backend = @backend
     end
 
-    test 'difference is negative' do
+    test 'difference_as_currency with negative difference' do
       cmp = presenter 1_000, 2_000
-      assert_equal '-$1,000.00', cmp.difference
+      assert_equal '-$1,000.00', cmp.difference_as_currency
     end
 
-    test 'difference is positive' do
+    test 'difference_as_currency with positive difference' do
       cmp = presenter 2_000, 1_000
-      assert_equal '+$1,000.00', cmp.difference
+      assert_equal '+$1,000.00', cmp.difference_as_currency
     end
 
-    test 'difference is zero' do
+    test 'difference_as_currency with no difference' do
       cmp = presenter 100, 100
-      assert_equal '$0.00', cmp.difference
+      assert_equal '$0.00', cmp.difference_as_currency
+    end
+
+    test 'difference is deprecated' do
+      cmp = presenter 1, 100
+      Kernel.expects(:warn).with { |msg| msg =~ /\ADEPRECATION WARNING:/ }
+      assert_equal '-$99.00', cmp.difference
     end
 
     test 'percentage is negative' do

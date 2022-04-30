@@ -12,13 +12,24 @@ module Comparison
     ARROWS = { positive: '&uarr;', negative: '&darr;', nochange: '' }.freeze
 
     ##
-    # Returns Comparator#absolute presented as currency.
-    def difference(**options)
+    # Returns Comparator#difference formatted as currency.
+    def difference_as_currency(**options)
       if positive?
         number_to_currency absolute, format: '+%u%n', **options
       else
         number_to_currency absolute, **options
       end
+    end
+
+    ##
+    # Deprecated alias for `#difference_as_currency`.
+    #
+    # In a future release, this method will be changed to delegate directly
+    # `Comparator#difference`.
+    def difference(...)
+      Kernel.warn 'DEPRECATION WARNING: use #difference_as_currency instead of #difference' \
+                  " (called from #{caller(3..3).first})"
+      difference_as_currency(...)
     end
 
     ##
