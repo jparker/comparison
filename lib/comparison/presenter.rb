@@ -15,9 +15,9 @@ module Comparison
     # Returns Comparator#difference formatted as currency.
     def difference_as_currency(**options)
       if positive?
-        number_to_currency absolute, format: '+%u%n', **options
+        number_to_currency __getobj__.difference, format: '+%u%n', **options
       else
-        number_to_currency absolute, **options
+        number_to_currency __getobj__.difference, **options
       end
     end
 
@@ -33,35 +33,36 @@ module Comparison
     end
 
     ##
-    # Returns Comparator#relative formatted as a percentage.
+    # Returns Comparator#change formatted as a percentage.
     #
-    # If the relative percentage evaluates to Infinity or -Infinity, +nil+ is
-    # returned. If it evaluates to NaN, 0 is returned.
+    # If the change evaluates to Infinity or -Infinity, the I18n translaation
+    # for infinity is returned. If no translation is defined, `nil` is
+    # returned.
+    #
+    # If the change evaluates to NaN, it is returned as 0.
     def percentage(**options)
       if nan? || zero?
         number_to_percentage 0, **options
       elsif infinite?
         t 'comparison.infinity_html', default: nil
       elsif positive?
-        number_to_percentage relative, format: '+%n%', **options
+        number_to_percentage __getobj__.percentage, format: '+%n%', **options
       else
-        number_to_percentage relative, **options
+        number_to_percentage __getobj__.percentage, **options
       end
     end
 
     ##
-    # Returns the absolute value of Comparator#relative formatted as a percentage.
+    # Returns the absolute value of Comparator#change formatted as a percentage.
+    #
+    # See `#percentage` for additional information on special return scenarios.
     #
     # Use this if you are relying on other cues (colors and/or icons) to
     # indicate positive or negative values.
     def unsigned_percentage(**options)
-      if nan? || zero?
-        number_to_percentage 0, **options
-      elsif infinite?
-        t 'comparison.infinity_html', default: nil
-      else
-        number_to_percentage relative.abs, **options
-      end
+      return percentage(**options) if nan? || infinite?
+
+      number_to_percentage __getobj__.percentage.abs, **options
     end
 
     ##
