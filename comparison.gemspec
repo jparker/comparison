@@ -16,15 +16,12 @@ Gem::Specification.new do |s|
   s.description = 'Helpers for displaying details of comparing two numbers.'
   s.license     = 'MIT'
 
-  # rubocop:disable Metrics/LineLength
   s.files = Dir['{app,config,db,lib}/**/*', 'MIT-LICENSE', 'Rakefile', 'README.md']
-  # rubocop:enable Metrics/LineLength
 
   s.required_ruby_version = '>= 2.7'
 
-  s.add_dependency 'rails', '>= 4.0', '< 7.0'
+  s.add_dependency 'rails', '>= 5.0', '< 8.0'
 
-  s.add_development_dependency 'minitest-focus'
   s.add_development_dependency 'mocha'
   s.add_development_dependency 'pry'
   s.add_development_dependency 'rubocop'

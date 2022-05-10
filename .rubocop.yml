@@ -1,7 +1,6 @@
 AllCops:
   Exclude:
     - test/dummy/**/*
-    - test/test_helper.rb
     - bin/rails
     - comparison.gemspec
   NewCops: enable

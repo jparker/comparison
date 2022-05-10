@@ -13,13 +13,13 @@ class SmokeTest < ActionDispatch::IntegrationTest
     assert_select 'tr:nth-child(1)' do
       assert_select 'td:nth-child(1)', '-$25.00'
       assert_select 'td:nth-child(2)', '-25%'
-      assert_select 'td:nth-child(3)', '↓'
+      assert_select 'td:nth-child(3)', "\u2193"
     end
 
     assert_select 'tr:nth-child(2)' do
       assert_select 'td:nth-child(1)', '+$25.00'
       assert_select 'td:nth-child(2)', '+33%'
-      assert_select 'td:nth-child(3)', '↑'
+      assert_select 'td:nth-child(3)', "\u2191"
     end
 
     assert_select 'tr:nth-child(3)' do
@@ -31,8 +31,8 @@ class SmokeTest < ActionDispatch::IntegrationTest
 
     assert_select 'tr:nth-child(4)' do
       assert_select 'td:nth-child(1)', '+$75.00'
-      assert_select 'td:nth-child(2)', '—'
-      assert_select 'td:nth-child(3)', '↑'
+      assert_select 'td:nth-child(2)', "\u2014"
+      assert_select 'td:nth-child(3)', "\u2191"
     end
   end
 end
