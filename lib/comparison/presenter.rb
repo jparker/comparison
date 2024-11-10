@@ -27,8 +27,10 @@ module Comparison
     # In a future release, this method will be changed to delegate directly
     # `Comparator#difference`.
     def difference(...)
-      Kernel.warn 'DEPRECATION WARNING: use #difference_as_currency instead of #difference' \
-                  " (called from #{caller(3..3).first})"
+      Kernel.warn(<<~MSG.squish)
+        DEPRECATION WARNING: use #difference_as_currency instead of #difference
+        (called from #{caller(3..3).first})
+      MSG
       difference_as_currency(...)
     end
 
