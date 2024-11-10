@@ -4,6 +4,6 @@ AllCops:
     - bin/rails
     - comparison.gemspec
   NewCops: enable
-  TargetRubyVersion: 2.7.0
+  TargetRubyVersion: '3.2'
 Layout/ArgumentAlignment:
   Enabled: false
