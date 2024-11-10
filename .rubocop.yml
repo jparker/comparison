@@ -7,3 +7,8 @@ AllCops:
   TargetRubyVersion: '3.2'
 Layout/ArgumentAlignment:
   Enabled: false
+
+# Causing rubocop to crash. Maybe related to similar bug in different cop.
+# https://github.com/rubocop/rubocop-rspec/pull/1000
+Style/BitwisePredicate:
+  Enabled: false
