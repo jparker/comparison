@@ -4,6 +4,11 @@ AllCops:
     - bin/rails
     - comparison.gemspec
   NewCops: enable
-  TargetRubyVersion: 2.7.0
+  TargetRubyVersion: '3.2'
 Layout/ArgumentAlignment:
+  Enabled: false
+
+# Causing rubocop to crash. Maybe related to similar bug in different cop.
+# https://github.com/rubocop/rubocop-rspec/pull/1000
+Style/BitwisePredicate:
   Enabled: false

@@ -1,4 +1,4 @@
-# frozen-string-literal: true
+# frozen_string_literal: true
 
 require 'delegate'
 
@@ -13,11 +13,11 @@ module Comparison
 
     ##
     # Returns Comparator#difference formatted as currency.
-    def difference_as_currency(**options)
+    def difference_as_currency(**)
       if positive?
-        number_to_currency __getobj__.difference, format: '+%u%n', **options
+        number_to_currency(__getobj__.difference, format: '+%u%n', **)
       else
-        number_to_currency __getobj__.difference, **options
+        number_to_currency(__getobj__.difference, **)
       end
     end
 
@@ -27,8 +27,10 @@ module Comparison
     # In a future release, this method will be changed to delegate directly
     # `Comparator#difference`.
     def difference(...)
-      Kernel.warn 'DEPRECATION WARNING: use #difference_as_currency instead of #difference' \
-                  " (called from #{caller(3..3).first})"
+      Kernel.warn(<<~MSG.squish)
+        DEPRECATION WARNING: use #difference_as_currency instead of #difference
+        (called from #{caller(3..3).first})
+      MSG
       difference_as_currency(...)
     end
 
@@ -40,15 +42,15 @@ module Comparison
     # returned.
     #
     # If the change evaluates to NaN, it is returned as 0.
-    def percentage(**options)
+    def percentage(**)
       if nan? || zero?
-        number_to_percentage 0, **options
+        number_to_percentage(0, **)
       elsif infinite?
         t 'comparison.infinity_html', default: nil
       elsif positive?
-        number_to_percentage __getobj__.percentage, format: '+%n%', **options
+        number_to_percentage(__getobj__.percentage, format: '+%n%', **)
       else
-        number_to_percentage __getobj__.percentage, **options
+        number_to_percentage(__getobj__.percentage, **)
       end
     end
 
@@ -59,10 +61,10 @@ module Comparison
     #
     # Use this if you are relying on other cues (colors and/or icons) to
     # indicate positive or negative values.
-    def unsigned_percentage(**options)
-      return percentage(**options) if nan? || infinite?
+    def unsigned_percentage(**)
+      return percentage(**) if nan? || infinite?
 
-      number_to_percentage __getobj__.percentage.abs, **options
+      number_to_percentage(__getobj__.percentage.abs, **)
     end
 
     ##
@@ -217,8 +219,8 @@ module Comparison
       ActiveSupport::NumberHelper.number_to_percentage value, options
     end
 
-    def number_to_currency(*args)
-      ActiveSupport::NumberHelper.number_to_currency(*args)
+    def number_to_currency(*)
+      ActiveSupport::NumberHelper.number_to_currency(*)
     end
 
     def expand_i18n_keys(names, suffix: nil)

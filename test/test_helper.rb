@@ -1,4 +1,4 @@
-# frozen-string-literal: true
+# frozen_string_literal: true
 
 # Configure Rails Environment
 ENV['RAILS_ENV'] = 'test'
@@ -6,8 +6,9 @@ ENV['RAILS_ENV'] = 'test'
 require_relative '../test/dummy/config/environment'
 require 'rails/test_help'
 
+require 'debug'
+require 'minitest/focus'
 require 'mocha/minitest'
-require 'pry'
 
 # Filter out Minitest backtrace while allowing backtrace from other libraries
 # to be shown.
